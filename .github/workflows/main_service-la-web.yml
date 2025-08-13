@@ -49,7 +49,7 @@ jobs:
           path: .next/standalone
 
       - name: Azure Login via OIDC
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           auth-type: oidc
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_3B1A5569A67A4E8EB11F6E2DEE104EB7 }}
