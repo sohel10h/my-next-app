@@ -41,8 +41,9 @@ jobs:
       - name: Deploy to Azure WebApp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: my-next-app           # Replace with your Azure Web App name
+          app-name: 'service-la-web'          # Replace with your Azure Web App name
           package: .                      # Path to your build output folder
 
       - name: Azure Logout
         run: az logout
+
