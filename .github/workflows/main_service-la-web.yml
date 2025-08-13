@@ -38,7 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     permissions:
-      id-token: write # Required for OIDC login
       contents: read # Required for actions/checkout
 
     steps:
@@ -46,23 +45,19 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: nextjs-standalone
-          path: .next/standalone
+          path: standalone
 
-      - name: Azure Login via OIDC
+      - name: Azure Login via Service Principal
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8FDFCE1149AA4B39AB471B9CC6E7E9D7 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_466E8579BF234BC0B2D9ED7060F8B26A }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_DC3856FA79374AE282B52C4690740A0C }}
 
-      - name: Install production dependencies in standalone
-        run: |
-          cd .next/standalone
-          npm ci --production
 
       - name: Deploy Next.js Standalone Build to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'service-la-web'
           slot-name: 'Production'
-          package: .next/standalone
+          package: standalone
