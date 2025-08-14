@@ -43,8 +43,7 @@ jobs:
         with:
           app-name: 'second-web'
           slot-name: 'Production'
-          package: .
-          startup-command: 'npx next start'
+          package: '.'
 
       - name: Azure Logout
         run: az logout
