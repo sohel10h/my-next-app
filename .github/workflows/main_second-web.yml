@@ -29,6 +29,10 @@ jobs:
       - name: Build project
         run: npm run build
 
+      # Create deployment package
+      - name: Create deployment package
+        run: zip -r release.zip . -x ".git/*" ".github/*"
+
       # Azure login using OIDC
       - name: Azure Login
         uses: azure/login@v2
@@ -43,7 +47,7 @@ jobs:
         with:
           app-name: 'second-web'
           slot-name: 'Production'
-          package: '.'
+          package: 'release.zip'
 
       - name: Azure Logout
         run: az logout
