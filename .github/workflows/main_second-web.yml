@@ -29,8 +29,7 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Prune development dependencies
-        run: npm prune --production
+      
 
       # Create deployment package
       - name: Create deployment package
